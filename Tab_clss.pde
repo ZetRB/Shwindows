@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 class Tab{
   int x,y,w,h;
   Button close, minimise;
@@ -31,6 +30,3 @@ class Tab{
   minimise.draw();
  }
 }
-=======
-//hlello
->>>>>>> c06aff0ec78a618270d7dd6aea8cbae6c75cad01
