@@ -19,9 +19,12 @@ void setup() {
   background(backgroundR,backgroundG,backgroundB);
   clean = loadFont("MalgunGothic-100.vlw");
   userSettings = loadTable("userSettings.csv","header");
-  size(1000, 600);
   frameRate(60);
   pageAssets();
+}
+
+void settings(){
+  size(1000, 600);
 }
 
 void draw() {
