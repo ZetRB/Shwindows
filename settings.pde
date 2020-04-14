@@ -1,9 +1,9 @@
-class SettingsTab{
+class Settings{
   int x,y,w,h;
-  boolean minimised;
-  Button close,minimise;
+  Button save;
   Slider r,g,b;
- SettingsTab(int tx, int ty, int tw, int th){
+  Tab settingsTab;
+ Settings(int tx, int ty, int tw, int th){
    x = tx;
    y = ty;
    w = tw;
@@ -12,24 +12,26 @@ class SettingsTab{
  }
 
  void setup(){
-  close = new Button(x+w/2-20,y-h/2+20,20,20,255,0,0);
-  minimise = new Button(x+w/2-60,y-h/2+20,20,20,255,255,0);
+
   r = new Slider(x-w/2+100,y-h/2+100,100,255);
   g = new Slider(x-w/2+100,y-h/2+200,100,255);
   b = new Slider(x-w/2+100,y-h/2+300,100,255);
-
+  save = new Button("Save", x+w/2-50,y+h/2-50,30,30,true,true,true,100);
+  settingsTab=new Tab(x,y,w,h,"Settings");
 }
  
  void draw(){
    navigationButtons();
-   if(!minimised){
-  rectCenter(0,255,1);
-  rect(x,y,w,h);
-  close.draw();
-  minimise.draw();
+   updateSettings();
+   
+   if(!settingsTab.minimised){
+  settingsTab.draw();
   r.draw();
   g.draw();
   b.draw();
+  save.draw();
+  rectCenter(r.output,g.output,b.output,1);
+  rect(x-w/2+400,y-h/2+100,30,30);
 
    } else {
     
@@ -37,8 +39,26 @@ class SettingsTab{
  }
  
  void navigationButtons(){
-  if(minimise.clicked()){
+  if(settingsTab.minimise.clicked()){
    windows.settingsOpen = false; 
+  }
+ }
+ 
+ void updateSettings(){
+  if(save.clicked()){
+    backgroundR = r.output;
+    backgroundG = g.output;
+    backgroundB = b.output;
+    for(TableRow settings : userSettings.rows()){
+      println(currentUser.equals("Username"));
+     if(currentUser.equals("Username")){
+       println("saving settings");
+      settings.setInt("BackgroundR",backgroundR);
+      settings.setInt("BackgroundG",backgroundG); 
+      settings.setInt("BackgroundB",backgroundB); 
+     } 
+    }
+    saveTable(userSettings, "data/userSettings.csv");
   }
  }
 }
