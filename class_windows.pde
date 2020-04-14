@@ -27,7 +27,10 @@ class WindowsScreen{
       backgroundR = row.getInt("BackgroundR"); 
       backgroundG = row.getInt("BackgroundG"); 
       backgroundB = row.getInt("BackgroundB"); 
+      settings.r.setPosition(backgroundR);
+      settings.g.setPosition(backgroundG);
+      settings.b.setPosition(backgroundB);
      }
     } 
-  }
+  } 
 }

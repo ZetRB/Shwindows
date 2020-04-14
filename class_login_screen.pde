@@ -1,6 +1,6 @@
 class LoginScreen {
 
-  Button addNewUser, showPassword;
+  Button addNewUser, showPassword, showNewPassword;
   boolean correctDetails, makingNewUser;
   ArrayList<ErrorMessage> errors;
   TypeBar user, password, newUser, newPassword, confirmPassword;
@@ -9,9 +9,10 @@ class LoginScreen {
     password = new TypeBar(width/2, height/2+40, 400, 40, "Password", false);
     newUser = new TypeBar(width/2, height/2 -40, 400, 40, "Enter new username", true);
     newPassword = new TypeBar(width/2, height/2+40, 400, 40, "Enter new password", false);
-    confirmPassword = new TypeBar(width/2, height/2+120, 400, 40, "Confirm new password", true);
+    confirmPassword = new TypeBar(width/2, height/2+120, 400, 40, "Confirm new password", false);
     addNewUser = new Button("Creat new user", width/2, height/2 - 100, 100, 20, true, true, true, 0);  
     showPassword = new Button("Show", width/2+password.w/2-20, password.y, 30, 30, false, true, false, 0);
+    showNewPassword = new Button("Show", width/2+newPassword.w/2-20,newPassword.y,30,30,false,true,false,0);
     users = loadTable("users.csv", "header");
     errors = new ArrayList();
   }
@@ -108,6 +109,14 @@ class LoginScreen {
     newUser.draw();
     newPassword.draw();
     confirmPassword.draw();
+    showNewPassword.draw();
+    if(showNewPassword.mouseOver()){
+     newPassword.hidden = true; 
+     confirmPassword.hidden = true;
+    } else {
+     newPassword.hidden = false;
+     confirmPassword.hidden = false;
+    }
 
     if (newUser.pauseInput == true || newPassword.pauseInput == true || confirmPassword.pauseInput == true) {
       if (validDetails(newUser.output, newPassword.output, confirmPassword.output) == true) {

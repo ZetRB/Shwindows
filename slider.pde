@@ -57,4 +57,9 @@ class Slider {
     int output = int(map(relativePos, 0, sliderWidth, 0, increment));
     return output;
   }
+  
+  void setPosition(int sliderOutput){
+   int relativePos = int(map(sliderOutput,0,increment,0,sliderWidth));
+   slider.x = x-sliderWidth/2 + relativePos;
+  }
 }
