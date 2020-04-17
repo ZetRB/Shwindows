@@ -6,16 +6,16 @@ class TypeBar {
   //char[] inputs;
   ArrayList<String> inputs;
   boolean pauseInput;
-  boolean releasedOnce, hidden;
+  boolean releasedOnce, showText;
 
-
-  TypeBar(int tx, int ty, int tw, int th, String text, boolean hidePass) {
+// x position, y position, width,height,text displayed, is text shown
+  TypeBar(int tx, int ty, int tw, int th, String text, boolean showPass) {
     x = tx;
     y = ty;
     w = tw;
     h = th;
     name = text;
-    hidden = hidePass;
+    showText = showPass;
     setup();
   }
 
@@ -63,7 +63,7 @@ class TypeBar {
     for (int i = 0; i < inputs.size(); i++) {
       output += inputs.get(i);
     }
-    if (hidden == true) {
+    if (showText == true) {
       text(output, x-w/2+10, y);
     } else {
       for (int i = 0; i < inputs.size(); i++) {

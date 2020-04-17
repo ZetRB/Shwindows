@@ -2,6 +2,7 @@ class LoginScreen {
 
   Button addNewUser, showPassword, showNewPassword;
   boolean correctDetails, makingNewUser;
+  Button cancel;
   TypeBar user, password, newUser, newPassword, confirmPassword;
   void loadScreenAssets() {
     user = new TypeBar(width/2, height/2 -40, 400, 40, "Username", true); 
@@ -9,9 +10,10 @@ class LoginScreen {
     newUser = new TypeBar(width/2, height/2 -40, 400, 40, "Enter new username", true);
     newPassword = new TypeBar(width/2, height/2+40, 400, 40, "Enter new password", false);
     confirmPassword = new TypeBar(width/2, height/2+120, 400, 40, "Confirm new password", false);
-    addNewUser = new Button("Creat new user", width/2, height/2 - 100, 100, 20, true, true, true, 0);  
+    addNewUser = new MenuButton( width/2, height/2 - 100, 4*padding,padding,"Create new user");  
     showPassword = new Button("Show", width/2+password.w/2-20, password.y, 30, 30, false, true, false, 0);
     showNewPassword = new Button("Show", width/2+newPassword.w/2-20, newPassword.y, 30, 30, false, true, false, 0);
+    cancel = new MenuButton(showNewPassword.x-20, int(confirmPassword.y+padding*1.5),2*padding, padding, "Cancel");
     users = loadTable("users.csv", "header");
   }
   LoginScreen() {
@@ -37,9 +39,9 @@ class LoginScreen {
     addNewUser.draw();
     showPassword.draw();
     if (showPassword.mouseOver()) {
-      password.hidden = true;
+      password.showText = true;
     } else {
-      password.hidden = false;
+      password.showText = false;
     }
     if (addNewUser.clicked() == true) {
       makingNewUser = true;
@@ -96,12 +98,16 @@ class LoginScreen {
     newPassword.draw();
     confirmPassword.draw();
     showNewPassword.draw();
+    cancel.draw();
+    if (cancel.clicked()){
+     makingNewUser = false; 
+    }
     if (showNewPassword.mouseOver()) {
-      newPassword.hidden = true; 
-      confirmPassword.hidden = true;
+      newPassword.showText = true; 
+      confirmPassword.showText = true;
     } else {
-      newPassword.hidden = false;
-      confirmPassword.hidden = false;
+      newPassword.showText = false;
+      confirmPassword.showText = false;
     }
 
     if (newUser.pauseInput == true || newPassword.pauseInput == true || confirmPassword.pauseInput == true) {

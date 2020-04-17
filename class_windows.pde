@@ -18,6 +18,8 @@ class WindowsScreen{
     if(settingsOpen == true){
      settings.draw(); 
     }
+    taskbar.draw();
+    start.draw();
   }
   
   void checkSettings(){
@@ -30,6 +32,9 @@ class WindowsScreen{
       settings.r.setPosition(backgroundR);
       settings.g.setPosition(backgroundG);
       settings.b.setPosition(backgroundB);
+      settings.r.output = backgroundR;
+      settings.g.output = backgroundG;
+      settings.b.output = backgroundB;
      }
     } 
   } 

@@ -29,10 +29,12 @@ class StartMenu {
     if (icon.clicked()) {
       if (startOpen == false) {
         startOpen = true;
-      } else {
+      } else{
         startOpen = false;
       }
-    }
+    } else if(mousePressed && !icon.mouseOver() && !overlay.mouseOver()){
+        startOpen = false; 
+      } 
   }
 
 
