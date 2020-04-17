@@ -7,7 +7,7 @@ class StartMenu {
   }
 
   void setup() {
-    icon = new Button("Start", 40, height-25, 40, 30, true, true,false, 200);
+    icon = new Button("Start", 40, height-25, 40, 30, true, true,false, 400);
     overlay = new Button("Overlay", 125, height-200, 300, 300, true, false,false, 0);
     logout = new Button("Logout",40, height -75,40,30,true,true,true,200);
     settings = new Button("Settings",40,height -115,40,30,true,true,true,200);

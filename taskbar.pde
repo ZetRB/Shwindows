@@ -9,7 +9,7 @@ class TaskBar{
  }
  
  void setup(){
-     settingsIcon = new Button("S",100+30,height-25,30,30, true, true, true,100);
+     settingsIcon = new Button("S",100+30,height-25,30,30, true, true, true,200);
  }
  void draw(){
   rectCenter(0,255,1);

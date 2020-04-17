@@ -92,7 +92,7 @@ class Settings {
     //      }
     //    }
     //  }
-    //}
+    }
   }
 
 void navigationButtons() {

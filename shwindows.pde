@@ -6,6 +6,7 @@ WindowsScreen windows;
 boolean loginScreen = true;
 boolean windowsScreen = false;
 boolean loggingOut;
+float xoff;
 int count;
 int padding = 40;
 int backgroundR,backgroundG,backgroundB;
@@ -31,13 +32,15 @@ void settings(){
 }
 
 void draw() {
-  background(0);
+  background(map(noise(xoff),0,1,0,250),map(noise(1+xoff),0,1,0,250),map(noise(2+xoff),0,1,0,250));
+  xoff+=0.001;
   count++;
-  background(backgroundR, backgroundG, backgroundB);
+  
   logout();
   if (loginScreen) {
     login.draw();
   } else if(windowsScreen){
+    background(backgroundR, backgroundG, backgroundB);
     windows.draw();
   }
     showErrors();
