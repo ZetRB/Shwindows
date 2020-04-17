@@ -4,6 +4,7 @@ class Slider {
   int x, y,output;
   Button slider;
   boolean moving;
+  String sliderName;
   int sliderX, sliderY;
   Slider(int tx, int ty, int tw, int precision) {
     x = tx;
@@ -12,6 +13,17 @@ class Slider {
     sliderY = y;
     sliderWidth = tw;
     increment = precision;
+    setup();
+  }
+  
+  Slider(int tx, int ty, int tw, int precision,String name) {
+    x = tx;
+    y = ty;
+    sliderX = x;
+    sliderY = y;
+    sliderWidth = tw;
+    increment = precision;
+    sliderName = name;
     setup();
   }
   void setup() {
@@ -29,11 +41,11 @@ class Slider {
   }
   void slider() {
     output = output();
-    stroke(255);
-    fill(255);
-    textFont(clean,20);
+    stroke(200);
+    fill(200);
+    textFont(clean,15);
     textAlign(LEFT,CENTER);
-    text("Red value: "+ output, x-50, slider.y+50);
+    text(sliderName +" value: "+ output, x-50, slider.y+50);
     slider.draw();
     if (slider.clicked()) {
       moving = true;

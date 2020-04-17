@@ -1,6 +1,7 @@
 class Settings {
   int x, y, w, h, leftEdge, topEdge, rightEdge, bottomEdge;
   int menuWidth = 200;
+  int spacing;
   boolean displaySettings, securitySettings;
   Button save;
   Button display;
@@ -20,10 +21,10 @@ class Settings {
   }
 
   void setup() {
-
-    r = new Slider(x+menuWidth/2-150, topEdge+100, 100, 255);
-    g = new Slider(x+menuWidth/2, topEdge+100, 100, 255);
-    b = new Slider(x+menuWidth/2+150, topEdge+100, 100, 255);
+    spacing = (w-menuWidth-padding)/3;
+    r = new Slider(x+menuWidth/2-spacing, topEdge+100, 100, 255, "Red");
+    g = new Slider(x+menuWidth/2, topEdge+100, 100, 255, "Green");
+    b = new Slider(x+menuWidth/2+spacing, topEdge+100, 100, 255, "Blue");
     save = new Button("Save", x+w/2-50, y+h/2-50, 30, 30, true, true, true, 100);
     settingsTab=new Tab(x, y, w, h, "Settings");
     display = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*2, 160, 40, "Display");
@@ -37,8 +38,6 @@ class Settings {
     if (!settingsTab.minimised) {
       settingsTab.draw();
       save.draw();
-      rectCenter(r.output, g.output, b.output, 1);
-      rect(leftEdge+400, topEdge+100, 30, 30);
       menu();
       displaySettings(displaySettings);
       securitySettings(securitySettings);
@@ -67,12 +66,14 @@ class Settings {
       r.draw();
       g.draw();
       b.draw();
+      rectCenter(r.output, g.output, b.output, 1);
+      stroke(255);
+      rect(x+menuWidth/2, g.y+3*padding, spacing*3-80, 50);
     }
   }
-  
+
   void securitySettings(boolean show) {
     if (show) {
-     
     }
   }
 
@@ -87,22 +88,23 @@ class Settings {
       backgroundR = r.output;
       backgroundG = g.output;
       backgroundB = b.output;
-      for (TableRow settings : userSettings.rows()) {
-        try{
-        println(currentUser.equals(settings.getString("Username")));
-        } catch (NullPointerException e){
-          errors.add(new ErrorMessage( "Unable to save settings",x,y+200, "Red"));
+      try {
+        for (TableRow settings : userSettings.rows()) {
+
+
+          if (currentUser.equals(settings.getString("Username"))) {
+            println("saving settings");
+            settings.setInt("BackgroundR", backgroundR);
+            settings.setInt("BackgroundG", backgroundG); 
+            settings.setInt("BackgroundB", backgroundB);
+          }
+        } 
+      }catch (NullPointerException e) {
+          errors.add(new ErrorMessage( "Settings not saved to user", x, y+200, "Red"));
           return;
         }
-      
-        if (currentUser.equals(settings.getString("Username"))) {
-          println("saving settings");
-          settings.setInt("BackgroundR", backgroundR);
-          settings.setInt("BackgroundG", backgroundG); 
-          settings.setInt("BackgroundB", backgroundB);
-        }
+        saveTable(userSettings, "data/userSettings.csv");
       }
-      saveTable(userSettings, "data/userSettings.csv");
-    }
+   
   }
 }
