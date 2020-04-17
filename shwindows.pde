@@ -3,8 +3,8 @@ Table userSettings;
   Table users;
 LoginScreen login;
 WindowsScreen windows;
-boolean loginScreen = true;
-boolean windowsScreen = false;
+boolean loginScreen = false;
+boolean windowsScreen = true;
 boolean loggingOut;
 int count;
 int padding = 40;
@@ -40,7 +40,7 @@ void draw() {
   } else if(windowsScreen){
     windows.draw();
   }
-    errors();
+    showErrors();
 }
 
 void logout(){
@@ -58,12 +58,12 @@ void resetBackground(){
  backgroundB = 0;
 }
 
-void errors() {
+void showErrors() {
     for (ErrorMessage message : errors) {
       message.draw();
     }
     if (mousePressed) {
-      if (errors.size()>0) {
+      if (errors.size()>0 && errors.get(0).life < millis()) {
         errors.remove(errors.size()-1);
       }
     }

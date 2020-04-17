@@ -7,6 +7,7 @@ class ErrorMessage{
     errorMessage = message;
     x = tx;
     y = ty;
+    life = millis() + 200;
     if (colour == "Red"){
       r = 150;
       g = 0;

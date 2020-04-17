@@ -88,11 +88,12 @@ class Settings {
       backgroundG = g.output;
       backgroundB = b.output;
       for (TableRow settings : userSettings.rows()) {
-        //try{
-        //println(currentUser.equals(settings.getString("Username")));
-        //} catch (NullPointerException e){
-        //  //errors.add(new ErrorMessage(
-        //}
+        try{
+        println(currentUser.equals(settings.getString("Username")));
+        } catch (NullPointerException e){
+          errors.add(new ErrorMessage( "Unable to save settings",x,y+200, "Red"));
+          return;
+        }
       
         if (currentUser.equals(settings.getString("Username"))) {
           println("saving settings");
