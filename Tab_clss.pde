@@ -22,10 +22,10 @@ class Tab{
   strokeWeight(1);
   stroke(255);
   fill(255);
-  line(x-w/2,y-h/2+40,x+w/2,y-h/2+40);
+  line(x-w/2,y-h/2+padding,x+w/2,y-h/2+padding);
   textFont(clean,20);
   textAlign(LEFT,CENTER);
-  text(tabName,x-w/2+20,y-h/2+20);
+  text(tabName,x-w/2+padding/2,y-h/2+padding/2);
   close.draw();
   minimise.draw();
  }

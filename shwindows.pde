@@ -7,6 +7,7 @@ boolean loginScreen = true;
 boolean windowsScreen = false;
 boolean loggingOut;
 int count;
+int padding = 40;
 int backgroundR,backgroundG,backgroundB;
 String currentUser;
 int itemsInTaskbar;
@@ -73,6 +74,7 @@ void rectCenter(int r, int g, int b, int weight){
   fill(r,g,b);
   stroke(r,g,b);
   strokeWeight(weight);
+  rectMode(CENTER);
 }
 
 void rect(int x, int y, int w, int h){
