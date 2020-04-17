@@ -11,6 +11,7 @@ int padding = 40;
 int backgroundR,backgroundG,backgroundB;
 String currentUser;
 int itemsInTaskbar;
+ArrayList<ErrorMessage> errors;
 void pageAssets(){
  login = new LoginScreen();
  windows = new WindowsScreen();
@@ -22,6 +23,7 @@ void setup() {
   userSettings = loadTable("userSettings.csv","header");
   frameRate(60);
   pageAssets();
+  errors = new ArrayList();
 }
 
 void settings(){
@@ -29,6 +31,7 @@ void settings(){
 }
 
 void draw() {
+  background(0);
   count++;
   background(backgroundR, backgroundG, backgroundB);
   logout();
@@ -37,6 +40,7 @@ void draw() {
   } else if(windowsScreen){
     windows.draw();
   }
+    errors();
 }
 
 void logout(){
@@ -53,6 +57,17 @@ void resetBackground(){
  backgroundG = 0;
  backgroundB = 0;
 }
+
+void errors() {
+    for (ErrorMessage message : errors) {
+      message.draw();
+    }
+    if (mousePressed) {
+      if (errors.size()>0) {
+        errors.remove(errors.size()-1);
+      }
+    }
+  }
 
 
 

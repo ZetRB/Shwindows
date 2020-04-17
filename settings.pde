@@ -1,6 +1,7 @@
 class Settings {
   int x, y, w, h, leftEdge, topEdge, rightEdge, bottomEdge;
   int menuWidth = 200;
+  boolean displaySettings, securitySettings;
   Button save;
   Button display;
   Button security;
@@ -20,14 +21,13 @@ class Settings {
 
   void setup() {
 
-    r = new Slider(leftEdge+100, topEdge+100, 100, 255);
-    g = new Slider(leftEdge+100, topEdge+200, 100, 255);
-    b = new Slider(leftEdge+100, topEdge+300, 100, 255);
+    r = new Slider(x+menuWidth/2-150, topEdge+100, 100, 255);
+    g = new Slider(x+menuWidth/2, topEdge+100, 100, 255);
+    b = new Slider(x+menuWidth/2+150, topEdge+100, 100, 255);
     save = new Button("Save", x+w/2-50, y+h/2-50, 30, 30, true, true, true, 100);
     settingsTab=new Tab(x, y, w, h, "Settings");
-    display = new MenuButton(leftEdge+menuWidth/2,topEdge+padding*2,160,40,"Display");
-    security = new MenuButton(leftEdge+menuWidth/2,topEdge+padding*3+20,160,40,"Security");
-    
+    display = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*2, 160, 40, "Display");
+    security = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*3+20, 160, 40, "Security");
   }
 
   void draw() {
@@ -36,25 +36,46 @@ class Settings {
 
     if (!settingsTab.minimised) {
       settingsTab.draw();
-      r.draw();
-      g.draw();
-      b.draw();
       save.draw();
       rectCenter(r.output, g.output, b.output, 1);
       rect(leftEdge+400, topEdge+100, 30, 30);
       menu();
+      displaySettings(displaySettings);
+      securitySettings(securitySettings);
     } else {
     }
   }
-  
-  void menu(){
-  stroke(255);
-  strokeWeight(1);
-  line(leftEdge +menuWidth,topEdge+40,leftEdge+menuWidth,bottomEdge);
-  display.draw();
-  security.draw();
+
+  void menu() {
+    stroke(255);
+    strokeWeight(1);
+    line(leftEdge +menuWidth, topEdge+40, leftEdge+menuWidth, bottomEdge);
+    display.draw();
+    security.draw();
+    if (display.clicked()) {
+      displaySettings = true;
+      securitySettings = false;
+    } 
+    if (security.clicked()) {
+      displaySettings = false;
+      securitySettings = true;
+    }
+  }
+
+  void displaySettings(boolean show) {
+    if (show) {
+      r.draw();
+      g.draw();
+      b.draw();
+    }
   }
   
+  void securitySettings(boolean show) {
+    if (show) {
+     
+    }
+  }
+
   void navigationButtons() {
     if (settingsTab.minimise.clicked()) {
       windows.settingsOpen = false;
@@ -67,7 +88,12 @@ class Settings {
       backgroundG = g.output;
       backgroundB = b.output;
       for (TableRow settings : userSettings.rows()) {
-        println(currentUser.equals(settings.getString("Username")));
+        //try{
+        //println(currentUser.equals(settings.getString("Username")));
+        //} catch (NullPointerException e){
+        //  //errors.add(new ErrorMessage(
+        //}
+      
         if (currentUser.equals(settings.getString("Username"))) {
           println("saving settings");
           settings.setInt("BackgroundR", backgroundR);

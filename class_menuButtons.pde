@@ -6,7 +6,7 @@ class MenuButton extends Button {
   }
   @ Override 
     void display() {
-    if (mouseOver() && highlight) {
+    if (mouseOver() && highlight || active) {
       rectCenter(60, r, g, b, 1);
     } else {
       rectCenter(0, r, g, b, 1);

@@ -32,7 +32,8 @@ class Slider {
     stroke(255);
     fill(255);
     textFont(clean,20);
-    text(output, x+sliderWidth, slider.y);
+    textAlign(LEFT,CENTER);
+    text("Red value: "+ output, x-50, slider.y+50);
     slider.draw();
     if (slider.clicked()) {
       moving = true;

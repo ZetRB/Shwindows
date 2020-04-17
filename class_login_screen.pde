@@ -2,7 +2,6 @@ class LoginScreen {
 
   Button addNewUser, showPassword, showNewPassword;
   boolean correctDetails, makingNewUser;
-  ArrayList<ErrorMessage> errors;
   TypeBar user, password, newUser, newPassword, confirmPassword;
   void loadScreenAssets() {
     user = new TypeBar(width/2, height/2 -40, 400, 40, "Username", true); 
@@ -12,9 +11,8 @@ class LoginScreen {
     confirmPassword = new TypeBar(width/2, height/2+120, 400, 40, "Confirm new password", false);
     addNewUser = new Button("Creat new user", width/2, height/2 - 100, 100, 20, true, true, true, 0);  
     showPassword = new Button("Show", width/2+password.w/2-20, password.y, 30, 30, false, true, false, 0);
-    showNewPassword = new Button("Show", width/2+newPassword.w/2-20,newPassword.y,30,30,false,true,false,0);
+    showNewPassword = new Button("Show", width/2+newPassword.w/2-20, newPassword.y, 30, 30, false, true, false, 0);
     users = loadTable("users.csv", "header");
-    errors = new ArrayList();
   }
   LoginScreen() {
     setup();
@@ -29,23 +27,11 @@ class LoginScreen {
     } else {
       newUserDraw();
     }
-    errors();
   }
 
-  void errors() {
-    for (ErrorMessage message : errors) {
-      message.draw();
-    }
-    if (mousePressed) {
-      if (errors.size()>0) {
-        errors.remove(errors.size()-1);
-      }
-    }
-  }
+
   // -------------------------------------------------------------------------login begins
-  void loginDraw() {
-
-    background(0); 
+  void loginDraw(){ 
     user.draw();
     password.draw();
     addNewUser.draw();
@@ -110,18 +96,18 @@ class LoginScreen {
     newPassword.draw();
     confirmPassword.draw();
     showNewPassword.draw();
-    if(showNewPassword.mouseOver()){
-     newPassword.hidden = true; 
-     confirmPassword.hidden = true;
+    if (showNewPassword.mouseOver()) {
+      newPassword.hidden = true; 
+      confirmPassword.hidden = true;
     } else {
-     newPassword.hidden = false;
-     confirmPassword.hidden = false;
+      newPassword.hidden = false;
+      confirmPassword.hidden = false;
     }
 
     if (newUser.pauseInput == true || newPassword.pauseInput == true || confirmPassword.pauseInput == true) {
       if (validDetails(newUser.output, newPassword.output, confirmPassword.output) == true) {
         saveInputs();
-        
+
         resetNewInputs();
         errors.add(new ErrorMessage("Details updated", confirmPassword.x, confirmPassword.y+100, "Green"));
         saveTable(users, "data/users.csv");
