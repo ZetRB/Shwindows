@@ -20,13 +20,4 @@ class MenuButton extends Button {
     text(buttonName, x, y);
   }
 
-  @ Override
-    boolean clicked() {
-    if (mouseOver() && mousePressed && millis()-lastCount > buttonDelay) {
-      lastCount = millis();
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
