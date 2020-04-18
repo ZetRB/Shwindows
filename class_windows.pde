@@ -2,7 +2,8 @@ class WindowsScreen {
   StartMenu start;
   TaskBar taskbar;
   Settings settings;
-  boolean settingsOpen;
+  Messenger messenger;
+  boolean settingsOpen,messengerOpen;
   WindowsScreen() {
     setup();
   }
@@ -10,12 +11,15 @@ class WindowsScreen {
     start = new StartMenu();
     taskbar = new TaskBar();
     settings = new Settings(width/2, height/2, width-100, height-100);
+    messenger = new Messenger(width/2, height/2, width-100,height-100);
   }
   void draw() {
     taskbar.draw();
     start.draw();
     if (settingsOpen == true) {
       settings.draw();
+    }else if(messengerOpen == true){
+     messenger.draw(); 
     }
     taskbar.draw();
     start.draw();
