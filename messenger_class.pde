@@ -32,7 +32,7 @@ class Messenger {
 
   public void getInput(){
     if(keyPressed){
-      this.network.send(key);
+      this.network.send(str(key));
     }
   }
  void recieveData(){ 
