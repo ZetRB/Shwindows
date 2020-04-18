@@ -1,7 +1,7 @@
 class Settings {
   int x, y, w, h, leftEdge, topEdge, rightEdge, bottomEdge;
   int menuWidth = 200;
-  int spacing;
+  int spacing3,spacing2;
   boolean displaySettings = true;
   boolean securitySettings;
   boolean settingsLocked = true;
@@ -26,17 +26,17 @@ class Settings {
 
   void setup() {
     // x position, y position, width,height,text displayed, is text shown
-    spacing = (w-menuWidth-padding)/3;
+    spacing3 = (w-menuWidth-padding)/3;
     securityCheck = new TypeBar(x+menuWidth/2, topEdge+300, 400, 40, "Confirm Password", false);
-    r = new Slider(x+menuWidth/2-spacing, topEdge+80, 100, 255, "Red");
+    r = new Slider(x+menuWidth/2-spacing3, topEdge+80, 100, 255, "Red");
     g = new Slider(x+menuWidth/2, topEdge+80, 100, 255, "Green");
-    b = new Slider(x+menuWidth/2+spacing, topEdge+80, 100, 255, "Blue");
+    b = new Slider(x+menuWidth/2+spacing3, topEdge+80, 100, 255, "Blue");
     save = new Button("Save", x+w/2-50, y+h/2-50, 30, 30, true, true, true, 100);
     settingsTab=new Tab(x, y, w, h, "Settings");
     display = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*2, 160, 40, "Display");
     security = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*3+20, 160, 40, "Security");
     backgroundRandom = new MenuButton(x+menuWidth/2, b.y+padding*5, padding*6, padding, "Use random background");
-    backgroundCustom = new MenuButton(x+menuWidth/2, b.y+padding*7, padding*6, padding, "Use custom background");
+    backgroundCustom = new MenuButton(x+menuWidth/2, b.y+padding*5, padding*6, padding, "Use custom background");
   }
 
   void draw() {
@@ -80,7 +80,7 @@ class Settings {
       backgroundType();
       rectCenter(r.output, g.output, b.output, 1);
       stroke(255);
-      rect(x+menuWidth/2, g.y+3*padding, spacing*3-80, 50);
+      rect(x+menuWidth/2, g.y+3*padding, spacing3*3-80, 50);
     }
   }
 
