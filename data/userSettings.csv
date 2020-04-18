@@ -1,9 +1,9 @@
-Username,BackgroundR,BackgroundG,BackgroundB,NoiseBackground,NoiseBackgrount
-zet,153,117,109,true,true
-test,0,0,147,false,
+Username,BackgroundR,BackgroundG,BackgroundB,NoiseBackground,
+zet,145,178,0,false,
+test,0,0,0,false,
 new,,,,false,
 kai,0,206,168,false,
-1,122,109,76,false,
+1,183,0,0,false,
 k,43,142,81,false,
 a,,,,false,
 abc,153,119,20,false,
