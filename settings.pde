@@ -12,11 +12,11 @@ class Settings {
   Tab settingsTab;
   TypeBar securityCheck;
   MenuButton backgroundRandom, backgroundCustom;
-  Settings(int tx, int ty, int tw, int th) {
-    x = tx;
-    y = ty;
-    w = tw;
-    h = th;
+  Settings(int x, int y, int w, int h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
     leftEdge = x-w/2;
     rightEdge = x+w/2;
     topEdge = y-h/2;

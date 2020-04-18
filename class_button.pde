@@ -5,12 +5,12 @@ class Button {
   int buttonDelay;
   int lastCount;
   //name x,y, width,height,can the button be pressed, will it highlight ,will it have the name appear when highlighted, is there a delay 
-  Button(String name, int tx, int ty, int tw, int th, boolean press, boolean high, boolean show,int pause) { 
+  Button(String name, int x, int y, int w, int h, boolean press, boolean high, boolean show,int pause) { 
     buttonName = name;                                                                         
-    x = tx;
-    y = ty;
-    w = tw;
-    h = th;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
     r = 255;
     g = 255;
     b = 255;
@@ -20,14 +20,14 @@ class Button {
     buttonDelay = pause;
   }
   
-  Button(int tx, int ty, int tw, int th,int tr, int tg, int tb){
-   x = tx;
-   y = ty;
-   w = tw;
-   h = th;
-   r = tr;
-   g = tg;
-   b = tb;
+  Button(int x, int y, int w, int h,int r, int g, int b){
+   this.x = x;
+   this.y = y;
+   this.w = w;
+   this.h = h;
+   this.r = r;
+   this.g = g;
+   this.b = b;
    
    pressable = true;
    highlight = true;

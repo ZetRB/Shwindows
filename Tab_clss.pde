@@ -3,11 +3,11 @@ class Tab{
   Button close, minimise;
   String tabName;
   boolean minimised;
- Tab(int tx,int ty, int tw,  int th, String name){
-   x =tx;
-   y = ty;
-   w = tw;
-   h = th;
+ Tab(int x,int y, int w,  int h, String name){
+   this.x =x;
+   this.y = y;
+   this.w = w;
+   this.h = h;
    tabName = name;
    setup();
  }

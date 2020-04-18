@@ -1,7 +1,7 @@
 class MenuButton extends Button {
   boolean active = false;
-  MenuButton (int tx, int ty, int tw, int th, String name) {
-    super(name, tx, ty, tw, th, true, true, false, 100);
+  MenuButton (int x, int y, int w, int h, String name) {
+    super(name, x, y, w, h, true, true, false, 100);
     //name x,y, width,height,can the button be pressed, will it highlight ,will it have the name appear when highlighted, is there a delay
   }
   @ Override 
