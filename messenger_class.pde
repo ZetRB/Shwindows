@@ -18,7 +18,7 @@ class Messenger {
   void draw() {
     messengerTab.draw();
     navigationButtons();
-    getInput()
+    getInput();
     recieveData();
 
 
@@ -32,7 +32,7 @@ class Messenger {
 
   public void getInput(){
     if(keyPressed){
-      network.send(key)
+      network.send(key);
     }
   }
  void recieveData(){ 

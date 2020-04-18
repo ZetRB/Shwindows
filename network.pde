@@ -1,5 +1,5 @@
 //import ketai.net.KetaiNet;
-import processing.net.*
+import processing.net.*;
 
 Class network{
   Client c;
