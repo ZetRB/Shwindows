@@ -1,16 +1,14 @@
-//import ketai.net.KetaiNet;
 import processing.net.*;
-
-Class network{
+class Network{
   Client c;
   Server s;
   boolean actingServer = false;
-  String localNetworkPrefix = "192.168.0."
+  String localNetworkPrefix = "192.168.0";
   //String ip = KetaiNet.getIP(); 
   int port = 5204;
    
-  public network(){
-    if(!findServer){
+  public Network(){
+    if(!findServer()){
       actingServer = true;
       this.s = new Server(this, port);
     }
@@ -19,10 +17,10 @@ Class network{
   private boolean findServer(){
     for (int i = 0; i <= 100; i ++){
       try{
-        this.c = new Client(this, localNetworkPrefix + Str(i), 5204);
+        this.c = new Client(PApplet, localNetworkPrefix + str(i), 5204);
         return true;
       }catch(Exception e){
-        println("Could not connect to server on: " + localNetworkPrefix + str(i))
+        println("Could not connect to server on: " + localNetworkPrefix + str(i));
       }
     }
     return false;
@@ -30,14 +28,14 @@ Class network{
 
   public void send(String data){
     if(actingServer){
-      s.write(data)
+      s.write(data);
     }else{
-      c.write(data)
+      c.write(data);
     }
   }
 
   public String recieve(){
-    if (actingServer){
+    if (this.actingServer){
       c = s.available();
       if(c != null){
         return c.readString();
@@ -48,5 +46,6 @@ Class network{
         return c.readString();
       }
     }
+    return null;
   }
 }
