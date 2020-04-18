@@ -6,12 +6,12 @@ class Slider {
   boolean moving;
   String sliderName;
   int sliderX, sliderY;
-  Slider(int tx, int ty, int tw, int precision) {
-    x = tx;
-    y = ty;
+  Slider(int x, int y, int w, int precision) {
+    this.x = x;
+    this.y = y;
     sliderX = x;
     sliderY = y;
-    sliderWidth = tw;
+    sliderWidth = w;
     increment = precision;
     setup();
   }

@@ -9,11 +9,11 @@ class TypeBar {
   boolean releasedOnce, showText;
 
 // x position, y position, width,height,text displayed, is text shown
-  TypeBar(int tx, int ty, int tw, int th, String text, boolean showPass) {
-    x = tx;
-    y = ty;
-    w = tw;
-    h = th;
+  TypeBar(int x, int y, int w, int h, String text, boolean showPass) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
     name = text;
     showText = showPass;
     setup();

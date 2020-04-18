@@ -2,7 +2,7 @@ class Messenger {
   Tab messengerTab;
   int x, y, w, h;
   Messenger(int tx, int ty, int tw, int th) {
-    x =tx;
+    x = tx;
     y = ty;
     w = tw;
     h = th;

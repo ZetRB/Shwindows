@@ -3,10 +3,10 @@ class ErrorMessage{
   int x,y;
   int life;
   int r,g,b;
-  ErrorMessage(String message,int tx, int ty, String colour){
+  ErrorMessage(String message,int x, int y, String colour){
     errorMessage = message;
-    x = tx;
-    y = ty;
+    this.x = x;
+    this.y = y;
     life = millis() + 200;
     if (colour == "Red"){
       r = 150;
