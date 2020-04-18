@@ -1,31 +1,39 @@
-class WindowsScreen{
+class WindowsScreen {
   StartMenu start;
   TaskBar taskbar;
   Settings settings;
-    boolean settingsOpen;
-  WindowsScreen(){
-   setup(); 
+  boolean settingsOpen;
+  WindowsScreen() {
+    setup();
   }
-  void setup(){
+  void setup() {
     start = new StartMenu();
     taskbar = new TaskBar();
-    settings = new Settings(width/2, height/2 , width-100,height-100);
-    
+    settings = new Settings(width/2, height/2, width-100, height-100);
   }
-  void draw(){
+  void draw() {
     taskbar.draw();
     start.draw();
-    if(settingsOpen == true){
-     settings.draw(); 
+    if (settingsOpen == true) {
+      settings.draw();
     }
     taskbar.draw();
     start.draw();
   }
-  
-  void checkSettings(){
-   for(TableRow row : userSettings.rows()){
-     if(currentUser.equals(row.getString("Username"))){
-       println("user has colour settings");
+
+  void checkSettings() {
+    for (TableRow row : userSettings.rows()) {
+      if (currentUser.equals(row.getString("Username"))) {
+        if (row.getString("NoiseBackground") == "true")
+          noiseBackground = true;
+          settings.backgroundRandom.active = true;
+          settings.backgroundCustom.active = false;
+      } else {
+        noiseBackground = false;
+          settings.backgroundRandom.active = false;
+          settings.backgroundCustom.active = true;
+      }
+      println("user has colour settings");
       backgroundR = row.getInt("BackgroundR"); 
       backgroundG = row.getInt("BackgroundG"); 
       backgroundB = row.getInt("BackgroundB"); 
@@ -35,7 +43,6 @@ class WindowsScreen{
       settings.r.output = backgroundR;
       settings.g.output = backgroundG;
       settings.b.output = backgroundB;
-     }
-    } 
-  } 
+    }
+  }
 }

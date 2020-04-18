@@ -4,12 +4,14 @@ class Settings {
   int spacing;
   boolean displaySettings = true;
   boolean securitySettings;
+  boolean settingsLocked = true;
   Button save;
   Button display;
   Button security;
   Slider r, g, b;
   Tab settingsTab;
   TypeBar securityCheck;
+  MenuButton backgroundRandom, backgroundCustom;
   Settings(int tx, int ty, int tw, int th) {
     x = tx;
     y = ty;
@@ -33,6 +35,8 @@ class Settings {
     settingsTab=new Tab(x, y, w, h, "Settings");
     display = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*2, 160, 40, "Display");
     security = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*3+20, 160, 40, "Security");
+    backgroundRandom = new MenuButton(x+menuWidth/2, b.y+padding*5, padding*6, padding, "Use random background");
+    backgroundCustom = new MenuButton(x+menuWidth/2, b.y+padding*7, padding*6, padding, "Use custom background");
   }
 
   void draw() {
@@ -71,58 +75,79 @@ class Settings {
       r.draw();
       g.draw();
       b.draw();
+      backgroundRandom.draw();
+      backgroundCustom.draw();
+      backgroundType();
       rectCenter(r.output, g.output, b.output, 1);
       stroke(255);
       rect(x+menuWidth/2, g.y+3*padding, spacing*3-80, 50);
     }
   }
 
+  void backgroundType() {
+    if (backgroundRandom.clicked() && backgroundRandom.active == false) {
+      backgroundRandom.active = true;
+      backgroundCustom.active = false;
+    } else if (backgroundCustom.clicked() && backgroundCustom.active == false) {
+      backgroundCustom.active = true;
+      backgroundRandom.active = false;
+    }
+  }
+
   void securitySettings(boolean show) {
     if (show) {
       securityCheck.draw();
-    //  if (securityCheck.pauseInput) {
-    //    if (login.detailsCheck(currentUser, securityCheck.output)) {
-    //      securityCheck.pauseInput = false;
-    //      background(0);
-    //    } else {
-    //      securityCheck.pauseInput = false;
-    //      securityCheck.output = "";
-    //      for (int i = securityCheck.inputs.size()-1; i >= 0; i--) {
-    //        securityCheck.inputs.remove(i);
-    //      }
-    //    }
-    //  }
-    }
-  }
-
-void navigationButtons() {
-  if (settingsTab.minimise.clicked()) {
-    windows.settingsOpen = false;
-  }
-}
-
-void updateSettings() {
-  if (save.clicked()) {
-    backgroundR = r.output;
-    backgroundG = g.output;
-    backgroundB = b.output;
-    try {
-      for (TableRow settings : userSettings.rows()) {
-
-
-        if (currentUser.equals(settings.getString("Username"))) {
-          println("saving settings");
-          settings.setInt("BackgroundR", backgroundR);
-          settings.setInt("BackgroundG", backgroundG); 
-          settings.setInt("BackgroundB", backgroundB);
+      if (securityCheck.pauseInput) {
+        if (login.detailsCheck(currentUser, securityCheck.output)) {
+          securityCheck.pauseInput = false;
+          settingsLocked = false;
+        } else {
+          securityCheck.pauseInput = false;
+          securityCheck.output = "";
+          for (int i = securityCheck.inputs.size()-1; i >= 0; i--) {
+            securityCheck.inputs.remove(i);
+          }
         }
       }
     }
-    catch (NullPointerException e) {
-      errors.add(new ErrorMessage( "Settings not saved to user", x, y+200, "Red"));
-      return;
-    }
-    saveTable(userSettings, "data/userSettings.csv");
   }
-}
+
+  void navigationButtons() {
+    if (settingsTab.minimise.clicked()) {
+      windows.settingsOpen = false;
+    }
+  }
+
+  void updateSettings() {
+    if (save.clicked()) {
+      backgroundR = r.output;
+      backgroundG = g.output;
+      backgroundB = b.output;
+      try {
+        for (TableRow settings : userSettings.rows()) {
+
+
+          if (currentUser.equals(settings.getString("Username"))) {
+            if (backgroundRandom.active == true) {
+              settings.setString("NoiseBackgrount", "true");
+              noiseBackground = true;
+              println("user selected noise background");
+            } else {
+              println("saving settings");
+              settings.setInt("BackgroundR", backgroundR);
+              settings.setInt("BackgroundG", backgroundG); 
+              settings.setInt("BackgroundB", backgroundB);
+              settings.setString("NoiseBackgrount", "false");
+              noiseBackground = false;
+            }
+          }
+        }
+      }
+      catch (NullPointerException e) {
+        errors.add(new ErrorMessage( "Settings not saved to user", x, y+200, "Red"));
+        return;
+      }
+      saveTable(userSettings, "data/userSettings.csv");
+    }
+  }
 }

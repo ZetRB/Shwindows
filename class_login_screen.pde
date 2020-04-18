@@ -129,6 +129,7 @@ class LoginScreen {
     newInputs.setString("Password", newPassword.output);
     TableRow settings = userSettings.addRow();
     settings.setString("Username", newUser.output);
+    settings.setString("NoiseBackground", "true");
   }
 
   boolean validDetails(String username, String password, String checkPassword) {

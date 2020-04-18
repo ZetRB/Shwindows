@@ -12,6 +12,7 @@ int padding = 40;
 int backgroundR,backgroundG,backgroundB;
 String currentUser;
 int itemsInTaskbar;
+boolean noiseBackground = true;
 ArrayList<ErrorMessage> errors;
 void pageAssets(){
  login = new LoginScreen();
@@ -32,15 +33,13 @@ void settings(){
 }
 
 void draw() {
-  background(map(noise(xoff),0,1,0,250),map(noise(1+xoff),0,1,0,250),map(noise(2+xoff),0,1,0,250));
-  xoff+=0.001;
+  background(noiseBackground);
   count++;
   
   logout();
   if (loginScreen) {
     login.draw();
   } else if(windowsScreen){
-    background(backgroundR, backgroundG, backgroundB);
     windows.draw();
   }
     showErrors();
@@ -70,6 +69,15 @@ void showErrors() {
         errors.remove(errors.size()-1);
       }
     }
+  }
+  
+  void background(boolean noise){
+   if(noise){
+    background(map(noise(xoff),0,1,0,250),map(noise(1+xoff),0,1,0,250),map(noise(2+xoff),0,1,0,250)); 
+    xoff+=0.001;
+   } else {
+    background(backgroundR, backgroundG, backgroundB);
+   }
   }
 
 
