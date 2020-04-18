@@ -18,6 +18,10 @@ class Messenger {
   void draw() {
     messengerTab.draw();
     navigationButtons();
+    getInput()
+    recieveData();
+
+
   }
 
   void navigationButtons() {
@@ -25,4 +29,15 @@ class Messenger {
       windows.messengerOpen = false;
     }
   }
+
+  public void getInput(){
+    if(keyPressed){
+      network.send(key)
+    }
+  }
+ void recieveData(){ 
+   if(network.recieve() != null){
+     background(255,0,0);
+   }
+ }
 }

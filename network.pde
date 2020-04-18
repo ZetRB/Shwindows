@@ -13,8 +13,7 @@ Class network{
     if(!findServer){
       actingServer = true;
       this.s = new Server(this, port);
-    }else{
-      c.write("connected");
+    }
   }
 
   private boolean findServer(){
