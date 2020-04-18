@@ -10,43 +10,17 @@ class Network{
    
   public Network(PApplet parent){
     this.parent = parent;
-    if(!findServer()){
-      actingServer = true;
-      this.s = new Server(this.parent, port);
-    }
-  }
-
-  private boolean findServer(){
-    for (int i = 0; i <= 100; i ++){
-      try{
-        this.c = new Client(this.parent, localNetworkPrefix + str(i), 5204);
-        return true;
-      }catch(Exception e){
-        println("Could not connect to server on: " + localNetworkPrefix + str(i));
-      }
-    }
-    return false;
+    this.s = new Server(this.parent, port);
   }
 
   public void send(String data){
-    if(actingServer){
-      s.write(data);
-    }else{
-      c.write(data);
-    }
+    s.write(data);
   }
 
   public String recieve(){
-    if (this.actingServer){
-      c = s.available();
-      if(c != null){
-        return c.readString();
-      }
-
-    }else{
-      if (c.available() > 0){
-        return c.readString();
-      }
+    c = s.available();
+    if(c != null){
+      return c.readString();
     }
     return null;
   }
