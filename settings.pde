@@ -129,25 +129,26 @@ class Settings {
 
           if (currentUser.equals(settings.getString("Username"))) {
             if (backgroundRandom.active == true) {
-              settings.setString("NoiseBackgrount", "true");
+              settings.setString("NoiseBackground", "true");
               noiseBackground = true;
               println("user selected noise background");
             } else {
-              println("saving settings");
-              settings.setInt("BackgroundR", backgroundR);
-              settings.setInt("BackgroundG", backgroundG); 
-              settings.setInt("BackgroundB", backgroundB);
-              settings.setString("NoiseBackgrount", "false");
-              noiseBackground = false;
+             noiseBackground = false; 
+             settings.setString("NoiseBackground", "false"); 
+             print("user selsected custom background");
             }
-          }
+            println("saving settings");
+            settings.setInt("BackgroundR", backgroundR);
+            settings.setInt("BackgroundG", backgroundG); 
+            settings.setInt("BackgroundB", backgroundB);           
         }
       }
-      catch (NullPointerException e) {
-        errors.add(new ErrorMessage( "Settings not saved to user", x, y+200, "Red"));
-        return;
-      }
-      saveTable(userSettings, "data/userSettings.csv");
     }
+    catch (NullPointerException e) {
+      errors.add(new ErrorMessage( "Settings not saved to user", x, y+200, "Red"));
+      return;
+    }
+    saveTable(userSettings, "data/userSettings.csv");
   }
+}
 }

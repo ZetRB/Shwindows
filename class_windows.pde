@@ -24,25 +24,29 @@ class WindowsScreen {
   void checkSettings() {
     for (TableRow row : userSettings.rows()) {
       if (currentUser.equals(row.getString("Username"))) {
-        if (row.getString("NoiseBackground") == "true")
+
+        if (row.getString("NoiseBackground").equals("true")) {
           noiseBackground = true;
           settings.backgroundRandom.active = true;
           settings.backgroundCustom.active = false;
-      } else {
-        noiseBackground = false;
+        } else {
+          noiseBackground = false;
+          println(noiseBackground);
           settings.backgroundRandom.active = false;
           settings.backgroundCustom.active = true;
+        }
+        println("user has colour settings");
+        backgroundR = row.getInt("BackgroundR"); 
+        backgroundG = row.getInt("BackgroundG"); 
+        backgroundB = row.getInt("BackgroundB"); 
+
+        settings.r.setPosition(backgroundR);
+        settings.g.setPosition(backgroundG);
+        settings.b.setPosition(backgroundB);
+        settings.r.output = backgroundR;
+        settings.g.output = backgroundG;
+        settings.b.output = backgroundB;
       }
-      println("user has colour settings");
-      backgroundR = row.getInt("BackgroundR"); 
-      backgroundG = row.getInt("BackgroundG"); 
-      backgroundB = row.getInt("BackgroundB"); 
-      settings.r.setPosition(backgroundR);
-      settings.g.setPosition(backgroundG);
-      settings.b.setPosition(backgroundB);
-      settings.r.output = backgroundR;
-      settings.g.output = backgroundG;
-      settings.b.output = backgroundB;
     }
   }
 }

@@ -49,16 +49,11 @@ void logout(){
  if (loggingOut == true){
   windowsScreen = false;
   loginScreen = true;
-  resetBackground();
   loggingOut = false;
+  noiseBackground = true;
  }
 }
 
-void resetBackground(){
- backgroundR = 0;
- backgroundG = 0;
- backgroundB = 0;
-}
 
 void showErrors() {
     for (ErrorMessage message : errors) {
