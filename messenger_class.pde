@@ -1,17 +1,18 @@
 class Messenger {
   Tab messengerTab;
   int x, y, w, h;
-  Messenger(int tx, int ty, int tw, int th) {
-    x =tx;
-    y = ty;
-    w = tw;
-    h = th;
-
+  Network network;
+  Messenger(int x, int y, int w, int h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
     setup();
+    this.network = new Network();
   } 
 
   void setup() {
-    messengerTab = new Tab(x, y, w, h, "Messenger");
+    messengerTab = new Tab(this.x, this.y, this.w, this.h, "Messenger");
   }
 
   void draw() {
