@@ -2,13 +2,13 @@ class Messenger {
   Tab messengerTab;
   int x, y, w, h;
   Network network;
-  Messenger(int x, int y, int w, int h) {
+  Messenger(PApplet parent, int x, int y, int w, int h) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     setup();
-    this.network = new Network();
+    this.network = new Network(parent);
   } 
 
   void setup() {

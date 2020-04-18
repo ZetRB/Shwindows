@@ -16,7 +16,7 @@ boolean noiseBackground = true;
 ArrayList<ErrorMessage> errors;
 void pageAssets(){
  login = new LoginScreen();
- windows = new WindowsScreen();
+ windows = new WindowsScreen(this);
 }
 
 void setup() {

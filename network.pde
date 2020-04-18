@@ -6,18 +6,20 @@ class Network{
   String localNetworkPrefix = "192.168.0";
   //String ip = KetaiNet.getIP(); 
   int port = 5204;
+  PApplet parent;
    
-  public Network(){
+  public Network(PApplet parent){
+    this.parent = parent;
     if(!findServer()){
       actingServer = true;
-      this.s = new Server(this, port);
+      this.s = new Server(this.parent, port);
     }
   }
 
   private boolean findServer(){
     for (int i = 0; i <= 100; i ++){
       try{
-        this.c = new Client(PApplet, localNetworkPrefix + str(i), 5204);
+        this.c = new Client(this.parent, localNetworkPrefix + str(i), 5204);
         return true;
       }catch(Exception e){
         println("Could not connect to server on: " + localNetworkPrefix + str(i));

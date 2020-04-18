@@ -4,14 +4,16 @@ class WindowsScreen {
   Settings settings;
   Messenger messenger;
   boolean settingsOpen,messengerOpen;
-  WindowsScreen() {
+  PApplet parent;
+  WindowsScreen(PApplet parent) {
+    this.parent = parent;
     setup();
   }
   void setup() {
     start = new StartMenu();
     taskbar = new TaskBar();
     settings = new Settings(width/2, height/2, width-100, height-100);
-    messenger = new Messenger(width/2, height/2, width-100,height-100);
+    messenger = new Messenger(this.parent, width/2, height/2, width-100,height-100);
   }
   void draw() {
     taskbar.draw();
