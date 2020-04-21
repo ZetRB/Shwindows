@@ -1,12 +1,11 @@
-import http.requests.*;
 class Messenger {
   Tab messengerTab;
   int x, y, w, h, leftEdge,rightEdge,topEdge,bottomEdge;
   int menuWidth = 200;
   Network network;
-  MenuButton publicChat;
+  MenuButton publicChat, send;
   TypeBar messageToSend;
-  Messenger(int x, int y, int w, int h) {
+  Messenger(PApplet parent, int x, int y, int w, int h) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -16,20 +15,23 @@ class Messenger {
     topEdge = y-h/2;
     bottomEdge = y+h/2;
     setup();
-   
+    this.network = new Network(parent);
   } 
 
   void setup() {
     messengerTab = new Tab(this.x, this.y, this.w, this.h, "Messenger");
-    messageToSend = new TypeBar(x+menuWidth/2,bottomEdge-padding,w-menuWidth-padding,40, "Enter message",true);
+    messageToSend = new TypeBar(x+menuWidth/2-int(1.5*padding),bottomEdge-padding,w-menuWidth-4*padding,40, "Enter message",true);
     // x position, y position, width,height,text displayed, is text shown
     publicChat = new MenuButton (leftEdge+menuWidth/2,topEdge+2*padding,160,40,"Public");
+    send = new MenuButton (messageToSend.x+messageToSend.w/2+int(1.5*padding),messageToSend.y,80,40,"Send");
   }
 
   void draw() {
     messengerTab.draw();
     navigationButtons();
     menu();
+    getInput();
+    recieveData();
     if(publicChat.active == true){
      display(); 
     }
@@ -55,5 +57,17 @@ class Messenger {
   
   void display(){ // this can go into a class but for now its just gonna be a chat room
     messageToSend.draw();
+    send.draw();
+  }
+
+  public void getInput(){
+    if(keyPressed){
+      this.network.send(str(key));
+    }
+  }
+ void recieveData(){ 
+   if(network.recieve() != null){
+     background(255,0,0);
+   }
  }
 }

@@ -3,12 +3,13 @@ Table userSettings;
   Table users;
 LoginScreen login;
 WindowsScreen windows;
+Network network;
 boolean loginScreen = true;
 boolean windowsScreen = false;
 boolean loggingOut;
 float xoff;
 int count;
-int padding = 40;
+int padding = 40; //works best at 40
 int backgroundR,backgroundG,backgroundB;
 String currentUser;
 int itemsInTaskbar;
@@ -16,7 +17,8 @@ boolean noiseBackground = true;
 ArrayList<ErrorMessage> errors;
 void pageAssets(){
  login = new LoginScreen();
- windows = new WindowsScreen(this);
+ windows = new WindowsScreen();
+ network = new Network();
 }
 
 void setup() {
@@ -26,10 +28,16 @@ void setup() {
   frameRate(60);
   pageAssets();
   errors = new ArrayList();
+  stroke(255);
+  textFont(clean,20);
+  fill(255);
+  strokeWeight(2);
+  text("Loading" , width/2,height/2);
+  network.status();
 }
 
 void settings(){
-  size(1000, 600);
+  size(1300, 600);
 }
 
 void draw() {
