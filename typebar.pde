@@ -8,7 +8,7 @@ class TypeBar {
   boolean pauseInput;
   boolean releasedOnce, showText;
 
-// x position, y position, width,height,text displayed, is text shown
+  // x position, y position, width,height,text displayed, is text shown
   TypeBar(int x, int y, int w, int h, String text, boolean showPass) {
     this.x = x;
     this.y = y;
@@ -27,11 +27,9 @@ class TypeBar {
   void draw() {
     if (pauseInput == false) {
       typing();
-     
     }
     barDraw();
     enter();
-    
   }
 
   void barDraw() {
@@ -83,30 +81,37 @@ class TypeBar {
       }
     }
   }
-  
- 
+
+
   void typing() {
 
-    if (keyPressed && typing == false && active){
+    if (keyPressed && typing == false && active) {
       typing = true;     
       if (key == BACKSPACE && inputs.size()>0) { 
         inputs.remove(inputs.size()-1);
-      }else if(key == ENTER || key == RETURN){
+      } else if (key == ENTER || key == RETURN) {
         pauseInput = true;
-      }else if(active){
+      } else if (active) {
         String c = str(key);
         inputs.add(c);
-        
       }
     } else if (typing == true && keyPressed == false) {
       typing = false;
     }
   }
 
- 
+
   void enter() {
-    if(releasedOnce == false){
-     releasedOnce = true; // released once stops the enter key being spammed basically
-    }
+    if (releasedOnce == false) {
+      releasedOnce = true; // released once stops the enter key being spammed basically
     }
   }
+
+  void reset() {
+    pauseInput = false;
+    output = "";
+    for (int i = inputs.size()-1; i >= 0; i--) {
+      inputs.remove(i);
+    }
+  }
+}
