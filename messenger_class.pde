@@ -16,6 +16,9 @@ class Messenger {
     bottomEdge = y+h/2;
     setup();
     this.network = new Network(parent);
+    GetRequest get = new GetRequest("https://processing-chat-api.herokuapp.com/status");
+    get.send();
+    println("Reponse Content: " + get.getContent());
   } 
 
   void setup() {

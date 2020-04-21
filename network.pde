@@ -1,4 +1,5 @@
 import processing.net.*;
+import http.requests.*;
 class Network{
   Client c;
   Server s;
@@ -24,4 +25,6 @@ class Network{
     }
     return null;
   }
+
+  
 }
