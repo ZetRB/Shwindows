@@ -3,6 +3,9 @@ class Messenger {
   Tab messengerTab;
   int x, y, w, h, leftEdge, rightEdge, topEdge, bottomEdge;
   int menuWidth = 200;
+  int refreshTime = 10000;
+  int lastRefresh;
+  boolean resetNow;
   JSONArray messages = null;
   ArrayList<Message> messagesToShow = new ArrayList<Message>();
   MenuButton publicChat, send, test;
@@ -58,6 +61,16 @@ class Messenger {
     messageToSend.draw();
     send.draw();
     test.draw();
+   println("im happeninfg once every turn");
+  }
+  
+  boolean refresh(){
+    if(millis()-lastRefresh > refreshTime || resetNow){
+      resetNow = false;
+      return true;
+    } else {
+     return false; 
+    }
   }
 
   void messageHandling() {
@@ -68,19 +81,22 @@ class Messenger {
         current.draw();
       }
     }
-    if (test.clicked()) { //test to see message reply
+    if (refresh()) { //test to see message reply
       messages = network.getMessages();
+      println(" i shouldnt be happening every turn");
       if(messagesToShow.size()<messages.size()){
       for(int i = messagesToShow.size(); i<messages.size();i++){
            JSONObject message = messages.getJSONObject(i);
           messagesToShow.add(new Message(message.getString("name"),message.getString("message"),x+menuWidth/2,w));
        }
       }
+      lastRefresh = millis();
     }
 
   if (messageToSend.pauseInput || send.clicked()) {
     network.send(messageToSend.output);
     messageToSend.reset();
+    resetNow = true;
   }
 }
 }
