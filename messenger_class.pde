@@ -4,6 +4,7 @@ class Messenger {
   int x, y, w, h, leftEdge, rightEdge, topEdge, bottomEdge;
   int menuWidth = 200;
   JSONArray messages = null;
+  ArrayList<Message> messagesToShow = new ArrayList<Message>();
   MenuButton publicChat, send, test;
   TypeBar messageToSend;
   Messenger(int x, int y, int w, int h) {
@@ -61,14 +62,20 @@ class Messenger {
 
   void messageHandling() {
     if (messages!= null) {
-      for (int i = 0; i < messages.size(); i++) {
-        JSONObject message = messages.getJSONObject(i);
-        textAlign(LEFT,CENTER);
-        text(message.getString("name") + ": " + message.getString("message"), leftEdge+menuWidth, topEdge+200+20*i);
+      for (int i = 0; i < messagesToShow.size(); i++) {
+        Message current = messagesToShow.get(i);
+        current.y = topEdge + i*40;
+        current.draw();
       }
     }
     if (test.clicked()) { //test to see message reply
       messages = network.getMessages();
+      if(messagesToShow.size()<messages.size()){
+      for(int i = messagesToShow.size(); i<messages.size();i++){
+           JSONObject message = messages.getJSONObject(i);
+          messagesToShow.add(new Message(message.getString("name"),message.getString("message"),x+menuWidth/2,w));
+       }
+      }
     }
 
   if (messageToSend.pauseInput || send.clicked()) {
