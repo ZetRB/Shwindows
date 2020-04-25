@@ -1,6 +1,7 @@
 import http.requests.*;
 class Messenger {
   Tab messengerTab;
+  VerticalSlider scroll;
   int x, y, w, h, leftEdge, rightEdge, topEdge, bottomEdge;
   int menuWidth = 200;
   int refreshTime = 10000;
@@ -28,6 +29,8 @@ class Messenger {
     send = new MenuButton (messageToSend.x+messageToSend.w/2+int(0.075*(w-menuWidth)), messageToSend.y, int(0.1*(w-menuWidth)), 40, "Send");
     // x position, y position, width,height,text displayed, is text shown
     publicChat = new MenuButton (leftEdge+menuWidth/2, topEdge+2*padding, 160, 40, "Public");
+    scroll = new VerticalSlider(rightEdge-padding,topEdge+h/2-padding,200,100);
+     //x,y,w,precision
   
   }
 
@@ -48,6 +51,7 @@ class Messenger {
     publicChat.draw();
     if (publicChat.clicked()) {
       publicChat.active = true;
+      scroll.setPosition(0);
     }
   }
 
@@ -60,6 +64,7 @@ class Messenger {
   void display() { // this can go into a class but for now its just gonna be a chat room
     messageToSend.draw();
     send.draw();
+    scroll.draw();
   }
   
   boolean refresh(){
@@ -75,8 +80,8 @@ class Messenger {
     if (messages!= null) {
       for (int i = 0; i < messagesToShow.size(); i++) {
         Message current = messagesToShow.get(i);
-        current.y = messageToSend.y-20 - (messagesToShow.size()-i)*40;
-        if(current.y>topEdge+padding*2 && current.y<messageToSend.y){
+        current.y = messageToSend.y-1 - (messagesToShow.size()-i)*40+scroll.output*10;
+        if(current.y>topEdge+padding && current.y<messageToSend.y-padding){
         current.draw();
         }
       }
@@ -90,6 +95,7 @@ class Messenger {
        }
       }
       lastRefresh = millis();
+      scroll.increment = 4*messages.size();
     }
 
   if (messageToSend.pauseInput || send.clicked()) {

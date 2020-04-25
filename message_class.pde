@@ -30,10 +30,10 @@ class Message{
       fill(backgroundR,backgroundG,backgroundB,255);      
     }
     noStroke();
-    rect(x-padding+w/2-textWidth(text)/2,y,textWidth(text) + padding,30);
+    rect(x-2*padding+w/2-textWidth(text)/2,y,textWidth(text) + padding,30);
    textAlign(RIGHT,CENTER);
    fill(255);
-   text(text,x-padding+w/2,y); 
+   text(text,x-2*padding+w/2,y); 
   }
   
   void incomingMessage(){
