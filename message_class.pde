@@ -29,17 +29,19 @@ class Message{
     } else if(!noiseBackground){
       fill(backgroundR,backgroundG,backgroundB,255);      
     }
-    rect(x,y,w,30);
+    noStroke();
+    rect(x-padding+w/2-textWidth(text)/2,y,textWidth(text) + padding,30);
    textAlign(RIGHT,CENTER);
    fill(255);
-   text(text,x+w/4,y); 
+   text(text,x-padding+w/2,y); 
   }
   
   void incomingMessage(){
    fill(100);
-   rect(x,y,w,30);
+   noStroke();
+   rect(x+padding-w/2+textWidth(name + ": " + text)/2,y,textWidth(name + ": " + text)+padding,30);
    textAlign(LEFT,CENTER);
    fill(255);
-   text(name + ": " + text,x-w/4,y);
+   text(name + ": " + text,x+padding-w/2,y);
   }
 }

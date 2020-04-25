@@ -47,7 +47,7 @@ class LoginScreen {
     if (addNewUser.clicked() == true) {
       makingNewUser = true;
     }
-    if (user.pauseInput == true || password.pauseInput == true) {
+    if (user.pauseInput == true || password.pauseInput == true) { // actual logging in bit
       if (detailsCheck(user.output, password.output) == true) {
         loginScreen = false;
         windowsScreen = true;

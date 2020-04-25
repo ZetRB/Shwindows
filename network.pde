@@ -18,8 +18,10 @@ class Network {
 
   
   void send(String message){
+   message = message.replace(" ", "%20");
    String link =  "https://processing-chat-api.herokuapp.com/" + "messages?name=" + currentUser + "&message=" + message;
    PostRequest post = new PostRequest(link);
+   println(link);
    post.send();
   } 
   

@@ -8,7 +8,7 @@ class Messenger {
   boolean resetNow;
   JSONArray messages = null;
   ArrayList<Message> messagesToShow = new ArrayList<Message>();
-  MenuButton publicChat, send, test;
+  MenuButton publicChat, send;
   TypeBar messageToSend;
   Messenger(int x, int y, int w, int h) {
     this.x = x;
@@ -28,7 +28,7 @@ class Messenger {
     send = new MenuButton (messageToSend.x+messageToSend.w/2+int(0.075*(w-menuWidth)), messageToSend.y, int(0.1*(w-menuWidth)), 40, "Send");
     // x position, y position, width,height,text displayed, is text shown
     publicChat = new MenuButton (leftEdge+menuWidth/2, topEdge+2*padding, 160, 40, "Public");
-    test = new MenuButton (x, y, 100, 100, "test");
+  
   }
 
   void draw() {
@@ -60,8 +60,6 @@ class Messenger {
   void display() { // this can go into a class but for now its just gonna be a chat room
     messageToSend.draw();
     send.draw();
-    test.draw();
-   println("im happeninfg once every turn");
   }
   
   boolean refresh(){
@@ -77,17 +75,18 @@ class Messenger {
     if (messages!= null) {
       for (int i = 0; i < messagesToShow.size(); i++) {
         Message current = messagesToShow.get(i);
-        current.y = topEdge + i*40;
+        current.y = messageToSend.y-20 - (messagesToShow.size()-i)*40;
+        if(current.y>topEdge+padding*2 && current.y<messageToSend.y){
         current.draw();
+        }
       }
     }
     if (refresh()) { //test to see message reply
       messages = network.getMessages();
-      println(" i shouldnt be happening every turn");
       if(messagesToShow.size()<messages.size()){
       for(int i = messagesToShow.size(); i<messages.size();i++){
            JSONObject message = messages.getJSONObject(i);
-          messagesToShow.add(new Message(message.getString("name"),message.getString("message"),x+menuWidth/2,w));
+          messagesToShow.add(new Message(message.getString("name"),message.getString("message"),x+menuWidth/2,w-menuWidth));
        }
       }
       lastRefresh = millis();
