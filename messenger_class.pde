@@ -4,7 +4,7 @@ class Messenger {
   int x, y, w, h, leftEdge,rightEdge,topEdge,bottomEdge;
   int menuWidth = 200;
   Network network;
-  MenuButton publicChat;
+  MenuButton publicChat,send;
   TypeBar messageToSend;
   Messenger(int x, int y, int w, int h) {
     this.x = x;
@@ -21,7 +21,8 @@ class Messenger {
 
   void setup() {
     messengerTab = new Tab(this.x, this.y, this.w, this.h, "Messenger");
-    messageToSend = new TypeBar(x+menuWidth/2,bottomEdge-padding,w-menuWidth-padding,40, "Enter message",true);
+    messageToSend = new TypeBar(x+int(0.15*(menuWidth)),bottomEdge-padding,int(0.8*(w-menuWidth)),40, "Enter message",true);
+    send = new MenuButton (messageToSend.x+messageToSend.w/2+int(0.075*(w-menuWidth)),messageToSend.y,int(0.1*(w-menuWidth)),40,"Send");
     // x position, y position, width,height,text displayed, is text shown
     publicChat = new MenuButton (leftEdge+menuWidth/2,topEdge+2*padding,160,40,"Public");
   }
@@ -55,5 +56,6 @@ class Messenger {
   
   void display(){ // this can go into a class but for now its just gonna be a chat room
     messageToSend.draw();
+    send.draw();
  }
 }

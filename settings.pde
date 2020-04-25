@@ -35,7 +35,7 @@ class Settings {
     settingsTab=new Tab(x, y, w, h, "Settings");
     display = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*2, 160, 40, "Display");
     security = new MenuButton(leftEdge+menuWidth/2, topEdge+padding*3+20, 160, 40, "Security");
-    backgroundRandom = new MenuButton(x+menuWidth/2, b.y+padding*5, padding*6, padding, "Use random background");
+    backgroundRandom = new MenuButton(x+menuWidth/2, b.y+padding*7, padding*6, padding, "Use random background");
     backgroundCustom = new MenuButton(x+menuWidth/2, b.y+padding*5, padding*6, padding, "Use custom background");
   }
 
