@@ -7,6 +7,7 @@ class TypeBar {
   ArrayList<String> inputs;
   boolean pauseInput;
   boolean releasedOnce, showText;
+  char oldKey;
 
   // x position, y position, width,height,text displayed, is text shown
   TypeBar(int x, int y, int w, int h, String text, boolean showPass) {
@@ -87,6 +88,7 @@ class TypeBar {
 
     if (keyPressed && typing == false && active) {
       typing = true;     
+      oldKey = key;
       if (key == BACKSPACE && inputs.size()>0) { 
         inputs.remove(inputs.size()-1);
       } else if (key == ENTER || key == RETURN) {
@@ -95,7 +97,7 @@ class TypeBar {
         String c = str(key);
         inputs.add(c);
       }
-    } else if (typing == true && keyPressed == false) {
+    } else if (typing == true && keyPressed == false || key!=oldKey) {
       typing = false;
     }
   }
