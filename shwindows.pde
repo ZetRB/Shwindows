@@ -74,6 +74,12 @@ void showErrors() {
     }
   }
   
+  void clearErrors(){
+   if( errors.size() > 0){
+    errors.remove(errors.size()-1); 
+   }
+  }
+  
   void background(boolean noise){
    if(noise){
     background(map(noise(xoff),0,1,0,250),map(noise(1+xoff),0,1,0,250),map(noise(2+xoff),0,1,0,250)); 
